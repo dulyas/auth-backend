@@ -4,7 +4,7 @@ import {v4} from 'uuid';
 import mailService from "./mail-service.js"
 import tokenService from "./token-service.js"
 import UserDto from "../dtos/user-dto.js"
-
+import config from "../config/index.js";
 
 class UserService {
     async registration(email, password) {
@@ -13,9 +13,10 @@ class UserService {
             throw new Error('Email already exist')
         } 
         const hashPassword = await bcrypt.hash(password, 3)
+
         const activationLink = v4()
-        const user = await UserModel.create({email, hashPassword, activationLink})
-        await mailService.sendActivationMail(email, activationLink)
+        const user = await UserModel.create({email, password: hashPassword, activationLink})
+        await mailService.sendActivationMail(email, `${config.API_URL}/api/activate/${activationLink}`)
         const userDto = new UserDto(user)
         const tokens = tokenService.generateTokens({...userDto})
         await tokenService.saveToken(userDto.id, tokens.refreshToken)
