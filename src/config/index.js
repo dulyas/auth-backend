@@ -10,5 +10,6 @@ export default {
     SMTP_PORT: process.env.SMTP_PORT,
     SMTP_USER: process.env.SMTP_USER,
     SMTP_PASSWORD: process.env.SMTP_PASSWORD,
-    API_URL: process.env.API_URL
+    API_URL: process.env.API_URL,
+    CLIENT_URL: process.env.CLIENT_URL
 }
