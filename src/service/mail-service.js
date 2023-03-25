@@ -7,8 +7,7 @@ class MailService {
         this.transporter = nodemailer.createTransport({
             host: config.SMTP_HOST,
             port: config.SMTP_PORT,
-            secure: true,
-            ignoreTLS: true,
+            secure: false,
             auth: {
                 user: config.SMTP_USER,
                 pass: config.SMTP_PASSWORD
