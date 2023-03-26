@@ -4,7 +4,7 @@ import config from "../config/index.js"
 
 class TokenService {
     generateTokens(payload) {
-        const accessToken = jwt.sign(payload, config.JWT_ACCESS_SECRET, {expiresIn: '30s'})
+        const accessToken = jwt.sign(payload, config.JWT_ACCESS_SECRET, {expiresIn: '15m'})
         const refreshToken = jwt.sign(payload, config.JWT_REFRESH_SECRET, {expiresIn: '30d'})
 
         return {
